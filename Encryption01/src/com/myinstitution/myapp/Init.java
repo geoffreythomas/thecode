@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 public class Init {
 
 	public static final String PLAIN_FOLDER = ".\\bin\\com\\myinstitution\\myapp\\plainfiles\\";
+	private static final String ENCRYPTED_FOLDER_INPUT = ".\\resources\\com\\myinstitution\\myapp\\encryptedfiles\\";
 	private static final String ENCRYPTED_FOLDER = ".\\bin\\com\\myinstitution\\myapp\\encryptedfiles\\";
 	private static final String DECRYPTED_FOLDER = ".\\bin\\com\\myinstitution\\myapp\\decryptedfiles\\";
 
