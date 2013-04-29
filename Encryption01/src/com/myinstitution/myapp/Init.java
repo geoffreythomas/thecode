@@ -1,5 +1,6 @@
 package com.myinstitution.myapp;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -112,15 +113,30 @@ public class Init {
 				LOGGER.debug("Starting Encryption of all files.");
 				System.out.println("Starting Encryption of all files.");
 				// encrypt();
-				System.out.println("Nothing to do now.");
+				File file = new File(PLAIN_FOLDER_INPUT);
+				String[] files = file.list();
+				for (int i = 0; i < files.length; i++) {
+					String inputFilepath = PLAIN_FOLDER_INPUT + files[i];
+					LOGGER.debug("Starting Encryption of file: '"
+							+ inputFilepath + "'");
+					System.out.println("Starting Encryption of file: '"
+							+ inputFilepath + "'");
+					String outputfilePath = ENCRYPTED_FOLDER_OUTPUT + files[i];
+					encrypt(inputFilepath, outputfilePath);
+					System.out.println("Completed Encryption of file: '"
+							+ inputFilepath + "'");
+				}
 				System.out.println("Completed Encryption of all files.");
 			} else if (choice.equals("2")) {
-				LOGGER.debug("Starting Encryption of one file.");
-				System.out.println("Starting Encryption of one file.");
 				String inputFilepath = PLAIN_FILE_INPUT;
+				LOGGER.debug("Starting Encryption of file: '" + inputFilepath
+						+ "'");
+				System.out.println("Starting Encryption of file: '"
+						+ inputFilepath + "'");
 				String outputfilePath = ENCRYPTED_FILE_OUTPUT;
 				encrypt(inputFilepath, outputfilePath);
-				System.out.println("Completed Encryption of one file.");
+				System.out.println("Completed Encryption of file: '"
+						+ inputFilepath + "'");
 			} else if (choice.equals("9")) {
 				LOGGER.debug("Exiting.");
 				System.out.println("Exiting.");
