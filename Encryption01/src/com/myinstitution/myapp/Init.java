@@ -10,15 +10,18 @@ import org.apache.log4j.Logger;
 
 public class Init {
 
-	public static final String PLAIN_FOLDER = ".\\bin\\com\\myinstitution\\myapp\\plainfiles\\";
-	private static final String ENCRYPTED_FOLDER_INPUT = ".\\resources\\com\\myinstitution\\myapp\\encryptedfiles\\";
-	private static final String ENCRYPTED_FOLDER = ".\\bin\\com\\myinstitution\\myapp\\encryptedfiles\\";
-	private static final String DECRYPTED_FOLDER = ".\\bin\\com\\myinstitution\\myapp\\decryptedfiles\\";
+	public static final String PLAIN_FOLDER_INPUT = ".\\resources\\com\\myinstitution\\myapp\\input\\plainfiles\\";
+	private static final String ENCRYPTED_FOLDER_INPUT = ".\\resources\\com\\myinstitution\\myapp\\input\\encryptedfiles\\";
+	private static final String ENCRYPTED_FOLDER_OUTPUT = ".\\bin\\com\\myinstitution\\myapp\\output\\encryptedfiles\\";
+	private static final String DECRYPTED_FOLDER_OUTPUT = ".\\bin\\com\\myinstitution\\myapp\\output\\decryptedfiles\\";
 
-	public static final String PLAIN_FILE = PLAIN_FOLDER + "passwords.data";
-	private static final String ENCRYPTED_FILE = ENCRYPTED_FOLDER
+	public static final String PLAIN_FILE_INPUT = PLAIN_FOLDER_INPUT
+			+ "passwords.data";
+	private static final String ENCRYPTED_FILE_INPUT = ENCRYPTED_FOLDER_INPUT
 			+ "passwords_encrypted.data";
-	private static final String DECRYPTED_FILE = DECRYPTED_FOLDER
+	private static final String ENCRYPTED_FILE_OUTPUT = ENCRYPTED_FOLDER_OUTPUT
+			+ "passwords_encrypted.data";
+	private static final String DECRYPTED_FILE_OUTPUT = DECRYPTED_FOLDER_OUTPUT
 			+ "passwords_decrypted.data";
 
 	private static final Logger LOGGER = Logger.getLogger(Init.class);
@@ -92,7 +95,7 @@ public class Init {
 	private static void displayEncryptOptions() {
 		LOGGER.debug("Entering displayEncryptOptions.");
 		System.out.println("Encrypt all the files in the folder '"
-				+ PLAIN_FOLDER + "' ?");
+				+ PLAIN_FOLDER_INPUT + "' ?");
 		System.out.println("1. Yes");
 		System.out.println("2. No");
 		System.out.println("9. Exit");
@@ -114,8 +117,8 @@ public class Init {
 			} else if (choice.equals("2")) {
 				LOGGER.debug("Starting Encryption of one file.");
 				System.out.println("Starting Encryption of one file.");
-				String inputFilepath = PLAIN_FILE;
-				String outputfilePath = ENCRYPTED_FILE;
+				String inputFilepath = PLAIN_FILE_INPUT;
+				String outputfilePath = ENCRYPTED_FILE_OUTPUT;
 				encrypt(inputFilepath, outputfilePath);
 				System.out.println("Completed Encryption of one file.");
 			} else if (choice.equals("9")) {
@@ -146,9 +149,9 @@ public class Init {
 
 	private static void decrypt() throws IOException {
 		LOGGER.debug("Entering decrypt.");
-		String inputFilepath = ENCRYPTED_FILE;
+		String inputFilepath = ENCRYPTED_FILE_INPUT;
 		FileInputStream fileInputStream = new FileInputStream(inputFilepath);
-		String outputfilePath = DECRYPTED_FILE;
+		String outputfilePath = DECRYPTED_FILE_OUTPUT;
 		FileOutputStream fileOutputStream = new FileOutputStream(outputfilePath);
 		Decrypt decrypt = new Decrypt();
 		decrypt.decrypt(fileInputStream, fileOutputStream);
