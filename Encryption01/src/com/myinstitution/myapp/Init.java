@@ -9,6 +9,10 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+/**
+ * @author Geoffrey Thomas
+ * 
+ */
 public class Init {
 
 	private static final String DEFAULT_FILENAME = "passwords.data";
@@ -28,10 +32,6 @@ public class Init {
 
 	private static final Logger LOGGER = Logger.getLogger(Init.class);
 
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
 	public static void main(String[] args) throws IOException {
 		// BasicConfigurator.configure();
 		LOGGER.debug("Welcome to Encryption.");
