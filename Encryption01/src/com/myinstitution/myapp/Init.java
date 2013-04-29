@@ -11,19 +11,20 @@ import org.apache.log4j.Logger;
 
 public class Init {
 
-	public static final String PLAIN_FOLDER_INPUT = ".\\resources\\com\\myinstitution\\myapp\\input\\plainfiles\\";
+	private static final String DEFAULT_FILENAME = "passwords.data";
+	private static final String PLAIN_FOLDER_INPUT = ".\\resources\\com\\myinstitution\\myapp\\input\\plainfiles\\";
 	private static final String ENCRYPTED_FOLDER_INPUT = ".\\resources\\com\\myinstitution\\myapp\\input\\encryptedfiles\\";
 	private static final String ENCRYPTED_FOLDER_OUTPUT = ".\\bin\\com\\myinstitution\\myapp\\output\\encryptedfiles\\";
 	private static final String DECRYPTED_FOLDER_OUTPUT = ".\\bin\\com\\myinstitution\\myapp\\output\\decryptedfiles\\";
 
 	public static final String PLAIN_FILE_INPUT = PLAIN_FOLDER_INPUT
-			+ "passwords.data";
+			+ DEFAULT_FILENAME;
 	private static final String ENCRYPTED_FILE_INPUT = ENCRYPTED_FOLDER_INPUT
-			+ "passwords_encrypted.data";
+			+ DEFAULT_FILENAME;
 	private static final String ENCRYPTED_FILE_OUTPUT = ENCRYPTED_FOLDER_OUTPUT
-			+ "passwords.data";
+			+ DEFAULT_FILENAME;
 	private static final String DECRYPTED_FILE_OUTPUT = DECRYPTED_FOLDER_OUTPUT
-			+ "passwords_decrypted.data";
+			+ DEFAULT_FILENAME;
 
 	private static final Logger LOGGER = Logger.getLogger(Init.class);
 
