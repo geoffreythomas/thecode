@@ -21,7 +21,7 @@ public class Init {
 	private static final String ENCRYPTED_FILE_INPUT = ENCRYPTED_FOLDER_INPUT
 			+ "passwords_encrypted.data";
 	private static final String ENCRYPTED_FILE_OUTPUT = ENCRYPTED_FOLDER_OUTPUT
-			+ "passwords_encrypted.data";
+			+ "passwords.data";
 	private static final String DECRYPTED_FILE_OUTPUT = DECRYPTED_FOLDER_OUTPUT
 			+ "passwords_decrypted.data";
 
@@ -149,18 +149,19 @@ public class Init {
 				displayEncryptOptions();
 			}
 		}
-
 		LOGGER.debug("Exiting processUserInputForEncryption.");
 	}
 
 	private static void encrypt(String inputFilepath, String outputfilePath)
 			throws FileNotFoundException, IOException {
+		LOGGER.debug("Entering encrypt.");
 		FileInputStream fileInputStream = new FileInputStream(inputFilepath);
 		FileOutputStream fileOutputStream = new FileOutputStream(outputfilePath);
 		Encrypt encrypt = new Encrypt();
 		encrypt.encrypt(fileInputStream, fileOutputStream);
 		fileInputStream.close();
 		fileOutputStream.close();
+		LOGGER.debug("Exiting encrypt.");
 	}
 
 	private static void decrypt() throws IOException {
