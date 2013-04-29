@@ -67,11 +67,13 @@ public class Init {
 				System.out.println("Starting Encryption.");
 				encrypt();
 				System.out.println("Completed Encryption.");
+				displayOptions();
 			} else if (choice.equals("2")) {
 				LOGGER.debug("Starting Decryption.");
 				System.out.println("Starting Decryption.");
 				decrypt();
 				System.out.println("Completed Decryption.");
+				displayOptions();
 			} else if (choice.equals("9")) {
 				LOGGER.debug("Exiting.");
 				System.out.println("Exiting.");
@@ -98,7 +100,7 @@ public class Init {
 		System.out.println("Encrypt all the files in the folder '"
 				+ PLAIN_FOLDER_INPUT + "' ?");
 		System.out.println("1. Yes");
-		System.out.println("2. No");
+		System.out.println("2. No - Encrypt only the default file");
 		System.out.println("9. Exit");
 		LOGGER.debug("Exiting displayEncryptOptions.");
 	}
@@ -112,7 +114,6 @@ public class Init {
 			if (choice.equals("1")) {
 				LOGGER.debug("Starting Encryption of all files.");
 				System.out.println("Starting Encryption of all files.");
-				// encrypt();
 				File file = new File(PLAIN_FOLDER_INPUT);
 				String[] files = file.list();
 				for (int i = 0; i < files.length; i++) {
@@ -127,6 +128,7 @@ public class Init {
 							+ inputFilepath + "'");
 				}
 				System.out.println("Completed Encryption of all files.");
+				displayEncryptOptions();
 			} else if (choice.equals("2")) {
 				String inputFilepath = PLAIN_FILE_INPUT;
 				LOGGER.debug("Starting Encryption of file: '" + inputFilepath
@@ -137,10 +139,10 @@ public class Init {
 				encrypt(inputFilepath, outputfilePath);
 				System.out.println("Completed Encryption of file: '"
 						+ inputFilepath + "'");
+				displayEncryptOptions();
 			} else if (choice.equals("9")) {
 				LOGGER.debug("Exiting.");
 				System.out.println("Exiting.");
-				displayOptions();
 				break;
 			} else {
 				LOGGER.error("Invalid choice entered.");
@@ -166,9 +168,74 @@ public class Init {
 
 	private static void decrypt() throws IOException {
 		LOGGER.debug("Entering decrypt.");
-		String inputFilepath = ENCRYPTED_FILE_INPUT;
+		displayDecryptOptions();
+		processUserInputForDecryption();
+		LOGGER.debug("Exiting decrypt.");
+	}
+
+	private static void displayDecryptOptions() {
+		LOGGER.debug("Entering displayDecryptOptions.");
+		System.out.println("Decrypt all the files in the folder '"
+				+ ENCRYPTED_FOLDER_INPUT + "' ?");
+		System.out.println("1. Yes");
+		System.out.println("2. No - Decrypt only the default file");
+		System.out.println("9. Exit");
+		LOGGER.debug("Exiting displayDecryptOptions.");
+	}
+
+	private static void processUserInputForDecryption() throws IOException {
+		LOGGER.debug("Entering processUserInputForDecryption.");
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNext()) {
+			String nextLine = scanner.nextLine();
+			String choice = nextLine.trim();
+			if (choice.equals("1")) {
+				LOGGER.debug("Starting Decryption of all files.");
+				System.out.println("Starting Decryption of all files.");
+				File file = new File(ENCRYPTED_FOLDER_INPUT);
+				String[] files = file.list();
+				for (int i = 0; i < files.length; i++) {
+					String inputFilepath = ENCRYPTED_FOLDER_INPUT + files[i];
+					LOGGER.debug("Starting Decryption of file: '"
+							+ inputFilepath + "'");
+					System.out.println("Starting Decryption of file: '"
+							+ inputFilepath + "'");
+					String outputfilePath = DECRYPTED_FOLDER_OUTPUT + files[i];
+					decrypt(inputFilepath, outputfilePath);
+					System.out.println("Completed Decryption of file: '"
+							+ inputFilepath + "'");
+				}
+				System.out.println("Completed Decryption of all files.");
+				displayDecryptOptions();
+			} else if (choice.equals("2")) {
+				String inputFilepath = ENCRYPTED_FILE_INPUT;
+				LOGGER.debug("Starting Decryption of file: '" + inputFilepath
+						+ "'");
+				System.out.println("Starting Decryption of file: '"
+						+ inputFilepath + "'");
+				String outputfilePath = DECRYPTED_FILE_OUTPUT;
+				decrypt(inputFilepath, outputfilePath);
+				System.out.println("Completed Decryption of file: '"
+						+ inputFilepath + "'");
+				displayDecryptOptions();
+			} else if (choice.equals("9")) {
+				LOGGER.debug("Exiting.");
+				System.out.println("Exiting.");
+				break;
+			} else {
+				LOGGER.error("Invalid choice entered.");
+				// System.out.print("\033[H\033[2J");
+				System.out.println("You have entered an invalid choice.");
+				displayDecryptOptions();
+			}
+		}
+		LOGGER.debug("Exiting processUserInputForDecryption.");
+	}
+
+	private static void decrypt(String inputFilepath, String outputfilePath)
+			throws IOException {
+		LOGGER.debug("Entering decrypt.");
 		FileInputStream fileInputStream = new FileInputStream(inputFilepath);
-		String outputfilePath = DECRYPTED_FILE_OUTPUT;
 		FileOutputStream fileOutputStream = new FileOutputStream(outputfilePath);
 		Decrypt decrypt = new Decrypt();
 		decrypt.decrypt(fileInputStream, fileOutputStream);
